@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\Admin;
+use App\Http\Controllers\Api\V1\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
+    Route::post('surveys', Admin\CreateSurveyController::class)->name('create');
 });
+
+Route::post('login', Auth\LoginController::class)->name('login');
