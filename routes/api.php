@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Api\V1\Admin;
 use App\Http\Controllers\Api\V1\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Public Endpoints
+Route::prefix('surveys')->name('surveys.')->group(function(){
+    Route::get('/{id?}', V1\GetSurveysController::class)->name('get-surveys')->whereUuid('id');
+});
+
 Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
-    Route::post('surveys', Admin\CreateSurveyController::class)->name('create');
+    Route::post('surveys', Admin\CreateSurveyController::class)->name('create-survey');
 });
 
 Route::post('login', Auth\LoginController::class)->name('login');
