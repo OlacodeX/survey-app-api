@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\CreateSurveyRequest;
 use App\Models\Survey;
 use App\Contracts\SurveyContract;
 use App\Http\Resources\SurveyResource;
+use Illuminate\Http\Response;
 
 class CreateSurveyController extends Controller
 {
@@ -23,6 +24,6 @@ class CreateSurveyController extends Controller
         $survey->expires_at = $validatedInput[SurveyContract::EXPIRES_AT];
         $survey->save();
 
-        return new SurveyResource($survey);
+        return new SurveyResource($survey,Response::HTTP_CREATED);
     }
 }

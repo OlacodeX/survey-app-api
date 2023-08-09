@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Contracts\SurveyContract;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Contracts\SurveyContract;
 
-class CreateSurveyRequest extends FormRequest
+class EditSurveyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,8 @@ class CreateSurveyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            SurveyContract::TITLE => ['required','string'],
-            SurveyContract::EXPIRES_AT => ['required','date'],
+            SurveyContract::TITLE => ['sometimes','string'],
+            SurveyContract::EXPIRES_AT => ['sometimes','date'],
         ];
     }
 }
