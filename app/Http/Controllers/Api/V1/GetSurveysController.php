@@ -27,6 +27,6 @@ class GetSurveysController extends Controller
             return new SurveyResource($survey, Response::HTTP_OK);
         }
         $surveys = Survey::with('creator')->paginate();
-        return !empty($surveys) ?  SurveyResource::collection($surveys, Response::HTTP_OK) : response()->json([],Response::HTTP_OK);
+        return $surveys ?  SurveyResource::collection($surveys, Response::HTTP_OK) : response()->json([],Response::HTTP_OK);
     }
 }

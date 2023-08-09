@@ -24,7 +24,7 @@ class GetSurveyQuestionsController extends Controller
 
         if ($request->route('question_id')) {
             try {
-                $question = $survey->questions->findorfail($request->route('question_id'));
+                $question = $survey->questions()->findorfail($request->route('question_id'));
             } catch (ModelNotFoundException $exception) {
                 return response()->json("No question found with the provided ID on this survey", Response::HTTP_NOT_FOUND);
             }
