@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Contracts\SurveyContract;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\QuestionType;
+use App\Contracts\SurveyQuestionContract;
 
-class CreateSurveyRequest extends FormRequest
+class CreateSurveyQuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +25,8 @@ class CreateSurveyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            SurveyContract::TITLE => ['required','string'],
-            SurveyContract::EXPIRES_AT => ['required','date'],
+            SurveyQuestionContract::QUESTION => ['required','string'],
+            SurveyQuestionContract::TYPE => ['required','integer', new Enum(QuestionType::class), 'max:3'],
         ];
     }
 }

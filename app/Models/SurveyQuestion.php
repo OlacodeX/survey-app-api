@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\QuestionType;
 
 class SurveyQuestion extends Model
 {
@@ -16,6 +19,7 @@ class SurveyQuestion extends Model
     * @var array
    */
    protected $casts = [
+        'type' => QuestionType::class,
        'created_at' => 'datetime',
        'updated_at' => 'datetime',
    ];
@@ -36,5 +40,25 @@ class SurveyQuestion extends Model
        return Attribute::make(
            get: fn ($value) => Carbon::parse($value)->toFormattedDateString(),
        );
+   }
+
+   /**
+    * Get the survey that owns the SurveyQuestion
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+   public function survey(): BelongsTo
+   {
+       return $this->belongsTo(Survey::class);
+   }
+
+   /**
+    * Get all of the answers for the SurveyQuestion
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+   public function answers(): HasMany
+   {
+       return $this->hasMany(SurveyQuestionAnswer::class, 'question_id');
    }
 }

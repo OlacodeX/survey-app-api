@@ -17,16 +17,16 @@ class GetSurveysController extends Controller
     public function __invoke(Request $request)
     {
         if ($request->route('id')) {
-            
+
             try {
-                $survey = Survey::findorfail($request->route('id'));
+                $survey = Survey::with('questions')->findorfail($request->route('id'));
             } catch (ModelNotFoundException $exception) {
                 return response()->json("No survey found with the provided ID", Response::HTTP_NOT_FOUND);
             }
             
-            return new SurveyResource($survey);
+            return new SurveyResource($survey, Response::HTTP_OK);
         }
-        $surveys = Survey::paginate();
-        return SurveyResource::collection($surveys);
+        $surveys = Survey::with('creator')->paginate();
+        return !empty($surveys) ?  SurveyResource::collection($surveys, Response::HTTP_OK) : response()->json([],Response::HTTP_OK);
     }
 }

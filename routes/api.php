@@ -17,12 +17,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Public Endpoints
-Route::prefix('surveys')->name('surveys.')->group(function(){
+Route::prefix('/surveys')->name('surveys.')->group(function(){
     Route::get('/{id?}', V1\GetSurveysController::class)->name('get-surveys')->whereUuid('id');
+    Route::prefix('/{id}')->group(function(){
+        Route::prefix('/questions')->group(function(){
+            Route::get('/{question_id?}', V1\GetSurveyQuestionsController::class)->name('get-surveys-questions')->whereUuid('question_id');
+        });
+    })->whereUuid('id');
 });
 
 Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
-    Route::post('surveys', Admin\CreateSurveyController::class)->name('create-survey');
+    Route::prefix('/surveys')->name('surveys.')->group(function(){
+        Route::post('/', Admin\CreateSurveyController::class)->name('create-survey');
+        Route::prefix('/{id}')->group(function(){
+            Route::post('/questions', Admin\CreateSurveyQuestionController::class)->name('create-survey-question');
+        })->whereUuid('id');
+    });
 });
 
 Route::post('login', Auth\LoginController::class)->name('login');
