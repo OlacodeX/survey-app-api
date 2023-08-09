@@ -14,7 +14,24 @@ use App\Http\Resources\SurveyQuestionResource;
 class EditSurveyQuestionController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * @group Admin
+     * 
+     * Add question to a survey.
+     *
+     * This endpoint allows an admin to edit a survey question
+     * @bodyParam question string sometimes The question of the survey. Example: My Question
+     * @bodyParam type string sometimes The question type which can either be 0 - text, 1 - single_choice, 2 - multiple_choice and 3 - number. Example: 0
+     * @response 200 {
+     *  "id": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,
+     *  "question": "Question One",
+     *  "type": "Text",
+     *  "survey": {
+     *      "id":"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01",
+     *       "title": "Title one"
+     * },
+     *  "created_at": "Aug 9, 2023"
+     * }
+     * @authenticated
      */
     public function __invoke(EditSurveyQuestionRequest $request)
     {

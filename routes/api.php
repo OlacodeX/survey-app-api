@@ -22,17 +22,15 @@ Route::prefix('/surveys')->name('surveys.')->group(function(){
     Route::get('/{id?}', V1\GetSurveysController::class)->name('get-surveys')->whereUuid('id');
     Route::prefix('/{id}')->group(function(){
         Route::prefix('/answers')->group(function(){
-            Route::post('/', Admin\CreateAnswersController::class)->name('create-survey-question-answers');
+            Route::post('/', V1\CreateAnswersController::class)->name('create-survey-question-answers');
         });
         Route::prefix('/questions')->group(function(){
             Route::get('/{question_id?}', V1\GetSurveyQuestionsController::class)->name('get-surveys-questions')->whereUuid('question_id');
-            Route::prefix('/{question_id}')->group(function(){
-                Route::get('/answers', V1\GetSurveyQuestionAnswersController::class)->name('get-survey-question-answers');
-            })->whereUuid('question_id');
         });
     })->whereUuid('id');
 });
 
+// Auth guarded endpoints
 Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::prefix('/surveys')->name('surveys.')->group(function(){
         Route::post('/', Admin\CreateSurveyController::class)->name('create-survey');
@@ -42,6 +40,7 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
             Route::prefix('/questions')->group(function(){
                 Route::post('/', Admin\CreateSurveyQuestionController::class)->name('create-survey-question');
                 Route::prefix('/{question_id}')->group(function(){
+                    Route::get('/answers', Admin\GetSurveyQuestionAnswersController::class)->name('get-survey-question-answers');
                     Route::patch('/', Admin\EditSurveyQuestionController::class)->name('edit-survey-question');
                     Route::delete('/', Admin\DeleteSurveyQuestionController::class)->name('delete-survey-question');
                 })->whereUuid('question_id');

@@ -10,8 +10,14 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DeleteSurveyQuestionController extends Controller
 {
-    /**
-     * Handle the incoming request.
+     /**
+     * @group Admin
+     * 
+     * Delete question from a survey.
+     *
+     * This endpoint allows an admin to delete question from a survey
+     * @response 200 {},
+     * @authenticated
      */
     public function __invoke(Request $request)
     {

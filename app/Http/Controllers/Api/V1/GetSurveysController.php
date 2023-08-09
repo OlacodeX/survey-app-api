@@ -12,7 +12,36 @@ use App\Http\Resources\SurveyResource;
 class GetSurveysController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * @group Users
+     * 
+     * Get List of Surveys.
+     *
+     * This endpoint allows a user to get the list of surveys
+     * @response 200 {
+     * {
+     *  "id": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,
+     *  "title": "Title One",
+     *  "slug": "title_one",
+     *  "creator": {
+     *       "name": "olawale",
+     *       "email": "aluko798@gmail.com"
+     * },
+     *  "expires_at": "Oct 17, 2023",
+     *  "created_at": "Aug 9, 2023"
+     * },
+     * {
+     *  "id": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,
+     *  "title": "Title One",
+     *  "slug": "title_one",
+     *  "creator": {
+     *       "name": "olawale",
+     *       "email": "aluko798@gmail.com"
+     * },
+     *  "expires_at": "Oct 17, 2023",
+     *  "created_at": "Aug 9, 2023"
+     * }
+     * }
+     * 
      */
     public function __invoke(Request $request)
     {

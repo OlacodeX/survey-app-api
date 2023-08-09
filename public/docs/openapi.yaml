@@ -1,0 +1,481 @@
+openapi: 3.0.3
+info:
+  title: 'Survey App API'
+  description: 'This is the docs for the survey app API'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/admin/surveys:
+    post:
+      summary: "Add new survey.\n\nThis endpoint allows an admin to create a new survey"
+      operationId: addNewSurveyThisEndpointAllowsAnAdminToCreateANewSurvey
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"title\": \"Title One\",\n \"slug\": \"title_one\",\n \"creator\": {\n      \"name\": \"olawale\",\n      \"email\": \"aluko798@gmail.com\"\n},\n \"expires_at\": \"Oct 17, 2023\",\n \"created_at\": \"Aug 9, 2023\"\n}"
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'The title of the survey.'
+                  example: 'My Survey'
+                expires_at:
+                  type: string
+                  description: 'The survey end date.'
+                  example: '2023-10-09'
+              required:
+                - title
+                - expires_at
+  '/api/v1/admin/surveys/{id}':
+    patch:
+      summary: "Edit Existing survey.\n\nThis endpoint allows an admin to edit an existing survey"
+      operationId: editExistingSurveyThisEndpointAllowsAnAdminToEditAnExistingSurvey
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"title\": \"Title One\",\n \"slug\": \"title_one\",\n \"creator\": {\n      \"name\": \"olawale\",\n      \"email\": \"aluko798@gmail.com\"\n},\n \"expires_at\": \"Oct 17, 2023\",\n \"created_at\": \"Aug 9, 2023\"\n}"
+      tags:
+        - Admin
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'sometimes The title of the survey.'
+                  example: 'My Survey'
+                expires_at:
+                  type: string
+                  description: 'sometimes The survey end date.'
+                  example: '2023-10-09'
+    delete:
+      summary: "Delete a survey.\n\nThis endpoint allows an admin to delete a survey"
+      operationId: deleteASurveyThisEndpointAllowsAnAdminToDeleteASurvey
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '{},'
+      tags:
+        - Admin
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the survey.'
+        example: at
+        required: true
+        schema:
+          type: string
+  '/api/v1/admin/surveys/{id}/questions':
+    post:
+      summary: "Add question to a survey.\n\nThis endpoint allows an admin to add question(s) to a survey"
+      operationId: addQuestionToASurveyThisEndpointAllowsAnAdminToAddQuestionsToASurvey
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"question\": \"Question One\",\n \"type\": \"Text\",\n \"survey\": {\n     \"id\":\"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n      \"title\": \"Title one\"\n},\n \"created_at\": \"Aug 9, 2023\"\n}"
+      tags:
+        - Admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: 'The question of the survey.'
+                  example: 'My Question'
+                type:
+                  type: string
+                  description: 'The question type which can either be 0 - text, 1 - single_choice, 2 - multiple_choice and 3 - number.'
+                  example: '0'
+              required:
+                - question
+                - type
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the survey.'
+        example: est
+        required: true
+        schema:
+          type: string
+  '/api/v1/admin/surveys/{id}/questions/{question_id}/answers':
+    get:
+      summary: "Get survey question answers.\n\nThis endpoint allows an admin to view answers for survey questions"
+      operationId: getSurveyQuestionAnswersThisEndpointAllowsAnAdminToViewAnswersForSurveyQuestions
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{{\n\"id\": \"99d9b176-0ff8-475f-97f7-0f04a788cb5c\",\n\"answer\": \"addsdff fdffrrff effd\",\n\"sur*vey\": {\n\"id\": \"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n\"title\": \"Test Survey Edited\",\n\"question\": {\n\"id\": \"99d890e6-fcde-493e-858f-28d96724c942\",\n\"question\": \"Where are you from\",\n\"type\": \"Multiple Choice\"\n}\n},\n\"created_at\": \"2023-08-09T17:37:22.000000Z\"\n},\n{\n\"id\": \"99d9b176-162a-4f26-8c97-cea63880a7f4\",\n\"answer\": \"do this, do not do this\",\n\"survey\": {\n\"id\": \"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n\"title\": \"Test Survey Edited\",\n\"question\": {\n\"id\": \"99d890e9-ed26-433c-ad4c-5ead5ee3435b\",\n\"question\": \"What is your name\",\n\"type\": \"Text\"\n}\n},\n\"created_at\": \"2023-08-09T17:37:22.000000Z\"\n}\n}"
+      tags:
+        - Admin
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the survey.'
+        example: dolorum
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: question_id
+        description: 'The ID of the question.'
+        example: est
+        required: true
+        schema:
+          type: string
+  '/api/v1/admin/surveys/{id}/questions/{question_id}':
+    patch:
+      summary: "Add question to a survey.\n\nThis endpoint allows an admin to edit a survey question"
+      operationId: addQuestionToASurveyThisEndpointAllowsAnAdminToEditASurveyQuestion
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"question\": \"Question One\",\n \"type\": \"Text\",\n \"survey\": {\n     \"id\":\"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n      \"title\": \"Title one\"\n},\n \"created_at\": \"Aug 9, 2023\"\n}"
+      tags:
+        - Admin
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: 'sometimes The question of the survey.'
+                  example: 'My Question'
+                type:
+                  type: string
+                  description: 'sometimes The question type which can either be 0 - text, 1 - single_choice, 2 - multiple_choice and 3 - number.'
+                  example: '0'
+    delete:
+      summary: "Delete question from a survey.\n\nThis endpoint allows an admin to delete question from a survey"
+      operationId: deleteQuestionFromASurveyThisEndpointAllowsAnAdminToDeleteQuestionFromASurvey
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: '{},'
+      tags:
+        - Admin
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the survey.'
+        example: corporis
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: question_id
+        description: 'The ID of the question.'
+        example: blanditiis
+        required: true
+        schema:
+          type: string
+  /api/v1/login:
+    post:
+      summary: 'Login endpoint for all users.'
+      operationId: loginEndpointForAllUsers
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"access_token\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n}"
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: ''
+                  example: reagan82@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: '&7xTHsI\NH2wc=S!I'
+              required:
+                - email
+                - password
+  '/api/v1/surveys/{id}':
+    get:
+      summary: "Get List of Surveys.\n\nThis endpoint allows a user to get the list of surveys"
+      operationId: getListOfSurveysThisEndpointAllowsAUserToGetTheListOfSurveys
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"title\": \"Title One\",\n \"slug\": \"title_one\",\n \"creator\": {\n      \"name\": \"olawale\",\n      \"email\": \"aluko798@gmail.com\"\n},\n \"expires_at\": \"Oct 17, 2023\",\n \"created_at\": \"Aug 9, 2023\"\n},\n{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"title\": \"Title One\",\n \"slug\": \"title_one\",\n \"creator\": {\n      \"name\": \"olawale\",\n      \"email\": \"aluko798@gmail.com\"\n},\n \"expires_at\": \"Oct 17, 2023\",\n \"created_at\": \"Aug 9, 2023\"\n}\n}"
+      tags:
+        - Users
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Optional parameter. The ID of the .'
+        required: true
+        schema:
+          type: string
+        examples:
+          omitted:
+            summary: 'When the value is omitted'
+            value: ''
+          present:
+            summary: 'When the value is present'
+            value: CCFCbfAf-FdfA-Bada-bDAB-eCdAeeEddEcC
+  '/api/v1/surveys/{id}/answers':
+    post:
+      summary: "Answer survey questions.\n\nThis endpoint allows a user to provide answers to survey questions"
+      operationId: answerSurveyQuestionsThisEndpointAllowsAUserToProvideAnswersToSurveyQuestions
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{{\n\"id\": \"99d9b176-0ff8-475f-97f7-0f04a788cb5c\",\n\"answer\": \"addsdff fdffrrff effd\",\n\"sur*vey\": {\n\"id\": \"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n\"title\": \"Test Survey Edited\",\n\"question\": {\n\"id\": \"99d890e6-fcde-493e-858f-28d96724c942\",\n\"question\": \"Where are you from\",\n\"type\": \"Multiple Choice\"\n}\n},\n\"created_at\": \"2023-08-09T17:37:22.000000Z\"\n},\n{\n\"id\": \"99d9b176-162a-4f26-8c97-cea63880a7f4\",\n\"answer\": \"do this, do not do this\",\n\"survey\": {\n\"id\": \"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n\"title\": \"Test Survey Edited\",\n\"question\": {\n\"id\": \"99d890e9-ed26-433c-ad4c-5ead5ee3435b\",\n\"question\": \"What is your name\",\n\"type\": \"Text\"\n}\n},\n\"created_at\": \"2023-08-09T17:37:22.000000Z\"\n}\n}"
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answer:
+                  type: object
+                  description: 'An array of the key value pair items where the question id is the key and answer to the question the value.'
+                  example:
+                    answer:
+                      99d890e6-fcde-493e-858f-28d96724c942:
+                        answer: 'addsdff fdffrrff effd'
+                      99d890e9-ed26-433c-ad4c-5ead5ee3435b:
+                        answer: 'do this, do not do this'
+                  properties: []
+              required:
+                - answer
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the survey.'
+        example: quis
+        required: true
+        schema:
+          type: string
+  '/api/v1/surveys/{id}/questions/{question_id}':
+    get:
+      summary: "Get survey questions.\n\nThis endpoint allows a user to get survey questions"
+      operationId: getSurveyQuestionsThisEndpointAllowsAUserToGetSurveyQuestions
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"question\": \"Question One\",\n \"type\": \"Text\",\n \"survey\": {\n     \"id\":\"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n      \"title\": \"Title one\"\n},\n \"created_at\": \"Aug 9, 2023\"\n},\n{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"question\": \"Question Two\",\n \"type\": \"Text\",\n \"survey\": {\n     \"id\":\"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n      \"title\": \"Title Two\"\n},\n \"created_at\": \"Aug 9, 2023\"\n}}"
+      tags:
+        - Users
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the survey.'
+        example: soluta
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: question_id
+        description: 'Optional parameter. The ID of the question.'
+        required: true
+        schema:
+          type: string
+        examples:
+          omitted:
+            summary: 'When the value is omitted'
+            value: ''
+          present:
+            summary: 'When the value is present'
+            value: BcabBeaB-CDaB-dCdF-acEc-dddDfDdeAbcD
+tags:
+  -
+    name: Admin
+    description: ''
+  -
+    name: Auth
+    description: ''
+  -
+    name: Users
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []

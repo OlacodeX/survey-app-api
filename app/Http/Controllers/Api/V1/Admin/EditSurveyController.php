@@ -12,8 +12,26 @@ use App\Http\Resources\SurveyResource;
 
 class EditSurveyController extends Controller
 {
-    /**
-     * Handle the incoming request.
+   /**
+     * @group Admin
+     * 
+     * Edit Existing survey.
+     *
+     * This endpoint allows an admin to edit an existing survey
+     * @bodyParam title string sometimes The title of the survey. Example: My Survey
+     * @bodyParam expires_at string sometimes The survey end date. Example: 2023-10-09
+     * @response 200 {
+     *  "id": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,
+     *  "title": "Title One",
+     *  "slug": "title_one",
+     *  "creator": {
+     *       "name": "olawale",
+     *       "email": "aluko798@gmail.com"
+     * },
+     *  "expires_at": "Oct 17, 2023",
+     *  "created_at": "Aug 9, 2023"
+     * }
+     * @authenticated
      */
     public function __invoke(EditSurveyRequest $request)
     {

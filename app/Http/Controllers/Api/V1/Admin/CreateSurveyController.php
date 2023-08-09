@@ -12,8 +12,26 @@ use Illuminate\Http\Response;
 
 class CreateSurveyController extends Controller
 {
-    /**
-     * Handle the incoming request.
+   /**
+     * @group Admin
+     * 
+     * Add new survey.
+     *
+     * This endpoint allows an admin to create a new survey
+     * @bodyParam title string required The title of the survey. Example: My Survey
+     * @bodyParam expires_at string required The survey end date. Example: 2023-10-09
+     * @response 201 {
+     *  "id": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,
+     *  "title": "Title One",
+     *  "slug": "title_one",
+     *  "creator": {
+     *       "name": "olawale",
+     *       "email": "aluko798@gmail.com"
+     * },
+     *  "expires_at": "Oct 17, 2023",
+     *  "created_at": "Aug 9, 2023"
+     * }
+     * @authenticated
      */
     public function __invoke(CreateSurveyRequest $request)
     {
