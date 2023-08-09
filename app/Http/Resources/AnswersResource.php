@@ -25,7 +25,7 @@ class AnswersResource extends JsonResource
                 SurveyQuestionAnswerContract::QUESTION => [
                     SurveyQuestionAnswerContract::ID => $this->question->id,
                     SurveyQuestionAnswerContract::QUESTION => $this->question->question,
-                    SurveyQuestionAnswerContract::TYPE => $this->question->type,
+                    SurveyQuestionAnswerContract::TYPE => $this->question->type->title(),
                 ],
             ],
             SurveyQuestionAnswerContract::CREATED_AT => $this->created_at,

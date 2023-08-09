@@ -1,0 +1,513 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Survey App API",
+        "_postman_id": "96383a5d-a0d2-4bd0-9788-72b947fb28c3",
+        "description": "This is the docs for the survey app API",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Admin",
+            "description": "",
+            "item": [
+                {
+                    "name": "Add new survey.\n\nThis endpoint allows an admin to create a new survey",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/surveys",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/surveys"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"title\":\"My Survey\",\"expires_at\":\"2023-10-09\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"title\": \"Title One\",\n \"slug\": \"title_one\",\n \"creator\": {\n      \"name\": \"olawale\",\n      \"email\": \"aluko798@gmail.com\"\n},\n \"expires_at\": \"Oct 17, 2023\",\n \"created_at\": \"Aug 9, 2023\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Edit Existing survey.\n\nThis endpoint allows an admin to edit an existing survey",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/surveys\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/surveys\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "at",
+                                    "description": "The ID of the survey."
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"title\":\"My Survey\",\"expires_at\":\"2023-10-09\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"title\": \"Title One\",\n \"slug\": \"title_one\",\n \"creator\": {\n      \"name\": \"olawale\",\n      \"email\": \"aluko798@gmail.com\"\n},\n \"expires_at\": \"Oct 17, 2023\",\n \"created_at\": \"Aug 9, 2023\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete a survey.\n\nThis endpoint allows an admin to delete a survey",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/surveys\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/surveys\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "voluptas",
+                                    "description": "The ID of the survey."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{},",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Add question to a survey.\n\nThis endpoint allows an admin to add question(s) to a survey",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/surveys\/:id\/questions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/surveys\/:id\/questions",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "est",
+                                    "description": "The ID of the survey."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"question\":\"My Question\",\"type\":\"0\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"question\": \"Question One\",\n \"type\": \"Text\",\n \"survey\": {\n     \"id\":\"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n      \"title\": \"Title one\"\n},\n \"created_at\": \"Aug 9, 2023\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get survey question answers.\n\nThis endpoint allows an admin to view answers for survey questions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/surveys\/:id\/questions\/:question_id\/answers",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/surveys\/:id\/questions\/:question_id\/answers",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "dolorum",
+                                    "description": "The ID of the survey."
+                                },
+                                {
+                                    "id": "question_id",
+                                    "key": "question_id",
+                                    "value": "est",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{{\n\"id\": \"99d9b176-0ff8-475f-97f7-0f04a788cb5c\",\n\"answer\": \"addsdff fdffrrff effd\",\n\"sur*vey\": {\n\"id\": \"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n\"title\": \"Test Survey Edited\",\n\"question\": {\n\"id\": \"99d890e6-fcde-493e-858f-28d96724c942\",\n\"question\": \"Where are you from\",\n\"type\": \"Multiple Choice\"\n}\n},\n\"created_at\": \"2023-08-09T17:37:22.000000Z\"\n},\n{\n\"id\": \"99d9b176-162a-4f26-8c97-cea63880a7f4\",\n\"answer\": \"do this, do not do this\",\n\"survey\": {\n\"id\": \"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n\"title\": \"Test Survey Edited\",\n\"question\": {\n\"id\": \"99d890e9-ed26-433c-ad4c-5ead5ee3435b\",\n\"question\": \"What is your name\",\n\"type\": \"Text\"\n}\n},\n\"created_at\": \"2023-08-09T17:37:22.000000Z\"\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Add question to a survey.\n\nThis endpoint allows an admin to edit a survey question",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/surveys\/:id\/questions\/:question_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/surveys\/:id\/questions\/:question_id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "corporis",
+                                    "description": "The ID of the survey."
+                                },
+                                {
+                                    "id": "question_id",
+                                    "key": "question_id",
+                                    "value": "blanditiis",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"question\":\"My Question\",\"type\":\"0\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"question\": \"Question One\",\n \"type\": \"Text\",\n \"survey\": {\n     \"id\":\"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n      \"title\": \"Title one\"\n},\n \"created_at\": \"Aug 9, 2023\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete question from a survey.\n\nThis endpoint allows an admin to delete question from a survey",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/admin\/surveys\/:id\/questions\/:question_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/admin\/surveys\/:id\/questions\/:question_id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "occaecati",
+                                    "description": "The ID of the survey."
+                                },
+                                {
+                                    "id": "question_id",
+                                    "key": "question_id",
+                                    "value": "voluptatum",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{},",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Auth",
+            "description": "",
+            "item": [
+                {
+                    "name": "Login endpoint for all users.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"reagan82@example.org\",\"password\":\"&7xTHsI\\\\NH2wc=S!I\"}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n \"access_token\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "description": "",
+            "item": [
+                {
+                    "name": "Get List of Surveys.\n\nThis endpoint allows a user to get the list of surveys",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/surveys\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/surveys\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "CCFCbfAf-FdfA-Bada-bDAB-eCdAeeEddEcC",
+                                    "description": "The ID of the ."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"title\": \"Title One\",\n \"slug\": \"title_one\",\n \"creator\": {\n      \"name\": \"olawale\",\n      \"email\": \"aluko798@gmail.com\"\n},\n \"expires_at\": \"Oct 17, 2023\",\n \"created_at\": \"Aug 9, 2023\"\n},\n{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"title\": \"Title One\",\n \"slug\": \"title_one\",\n \"creator\": {\n      \"name\": \"olawale\",\n      \"email\": \"aluko798@gmail.com\"\n},\n \"expires_at\": \"Oct 17, 2023\",\n \"created_at\": \"Aug 9, 2023\"\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Answer survey questions.\n\nThis endpoint allows a user to provide answers to survey questions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/surveys\/:id\/answers",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/surveys\/:id\/answers",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "quis",
+                                    "description": "The ID of the survey."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"answer\":{\"answer\":{\"99d890e6-fcde-493e-858f-28d96724c942\":{\"answer\":\"addsdff fdffrrff effd\"},\"99d890e9-ed26-433c-ad4c-5ead5ee3435b\":{\"answer\":\"do this, do not do this\"}}}}"
+                        },
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{{\n\"id\": \"99d9b176-0ff8-475f-97f7-0f04a788cb5c\",\n\"answer\": \"addsdff fdffrrff effd\",\n\"sur*vey\": {\n\"id\": \"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n\"title\": \"Test Survey Edited\",\n\"question\": {\n\"id\": \"99d890e6-fcde-493e-858f-28d96724c942\",\n\"question\": \"Where are you from\",\n\"type\": \"Multiple Choice\"\n}\n},\n\"created_at\": \"2023-08-09T17:37:22.000000Z\"\n},\n{\n\"id\": \"99d9b176-162a-4f26-8c97-cea63880a7f4\",\n\"answer\": \"do this, do not do this\",\n\"survey\": {\n\"id\": \"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n\"title\": \"Test Survey Edited\",\n\"question\": {\n\"id\": \"99d890e9-ed26-433c-ad4c-5ead5ee3435b\",\n\"question\": \"What is your name\",\n\"type\": \"Text\"\n}\n},\n\"created_at\": \"2023-08-09T17:37:22.000000Z\"\n}\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get survey questions.\n\nThis endpoint allows a user to get survey questions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/surveys\/:id\/questions\/:question_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/surveys\/:id\/questions\/:question_id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "soluta",
+                                    "description": "The ID of the survey."
+                                },
+                                {
+                                    "id": "question_id",
+                                    "key": "question_id",
+                                    "value": "BcabBeaB-CDaB-dCdF-acEc-dddDfDdeAbcD",
+                                    "description": "The ID of the question."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"question\": \"Question One\",\n \"type\": \"Text\",\n \"survey\": {\n     \"id\":\"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n      \"title\": \"Title one\"\n},\n \"created_at\": \"Aug 9, 2023\"\n},\n{\n \"id\": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,\n \"question\": \"Question Two\",\n \"type\": \"Text\",\n \"survey\": {\n     \"id\":\"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01\",\n      \"title\": \"Title Two\"\n},\n \"created_at\": \"Aug 9, 2023\"\n}}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "Authorization",
+                "value": null,
+                "type": "string"
+            }
+        ]
+    }
+}

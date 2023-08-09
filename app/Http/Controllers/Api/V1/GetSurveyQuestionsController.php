@@ -12,7 +12,32 @@ use App\Http\Resources\SurveyQuestionResource;
 class GetSurveyQuestionsController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * @group Users
+     * 
+     * Get survey questions.
+     *
+     * This endpoint allows a user to get survey questions
+     * @response 200 {{
+     *  "id": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,
+     *  "question": "Question One",
+     *  "type": "Text",
+     *  "survey": {
+     *      "id":"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01",
+     *       "title": "Title one"
+     * },
+     *  "created_at": "Aug 9, 2023"
+     * },
+     * {
+     *  "id": d346fd9f-a86a-47e5-ba30-b3d25e69bfd4,
+     *  "question": "Question Two",
+     *  "type": "Text",
+     *  "survey": {
+     *      "id":"99d88e74-00ce-4ad8-80c9-b53d4cc0bf01",
+     *       "title": "Title Two"
+     * },
+     *  "created_at": "Aug 9, 2023"
+     * }}
+     * 
      */
     public function __invoke(Request $request)
     {
