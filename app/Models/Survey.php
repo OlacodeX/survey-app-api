@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\Traits\ValidateAnswers;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Survey extends Model
 {
-    use HasFactory, HasUuids, Sluggable;
+    use HasFactory, HasUuids, Sluggable, ValidateAnswers;
     
     /**
     * The attributes that should be cast to native types.

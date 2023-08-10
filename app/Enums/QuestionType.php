@@ -19,6 +19,16 @@ enum QuestionType: int implements Base
         };
     }
 
+    public function question_type(): string
+    {
+        return match($this){
+            self::TEXT => 'string',
+            self::SINGLE_CHOICE => 'string',
+            self::MULTIPLE_CHOICE => 'string',
+            self::NUMBER => 'number',
+        };
+    }
+
     public function badge(): string
     {
         return match($this){
