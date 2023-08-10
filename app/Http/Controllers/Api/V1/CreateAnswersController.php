@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Survey;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateAnswersRequest;
-use App\Http\Resources\AnswersResource;
 use App\Models\SurveyQuestionAnswer;
+use App\Http\Resources\AnswersResource;
+use App\Http\Requests\CreateAnswersRequest;
+use App\Exceptions\WrongAnswerTypeException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CreateAnswersController extends Controller
@@ -27,7 +28,7 @@ class CreateAnswersController extends Controller
             *"answer": "do this, do not do this"
        * }
         *}}
-     * @response 201 {{
+     * @response 200 {{
             *"id": "99d9b176-0ff8-475f-97f7-0f04a788cb5c",
             *"answer": "addsdff fdffrrff effd",
             *"sur*vey": {
@@ -66,13 +67,20 @@ class CreateAnswersController extends Controller
         }
         
         $validatedInput = $request->validated();
-        // return array_values($validatedInput);
-        // return $validatedInput = $request->validated()['answer']['99d890e6-fcde-493e-858f-28d96724c942'];
+        
+        // Validate answers are of same types with question types
+        try {
+            $survey->validateAnswers($validatedInput['answer']);
+        } catch (WrongAnswerTypeException $e) {
+            return response()->json($e->getErrors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        
         foreach ($validatedInput['answer'] as $question_id => $answer_array) {
-            // dd($answer_array);
+            
             try {
                 $question = $survey->questions()->findorfail($question_id);
             } catch (ModelNotFoundException $exception) {
+                
             }
             $answer = new SurveyQuestionAnswer;
             $answer->answer = $validatedInput['answer'][$question_id]['answer'];
